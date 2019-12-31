@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>la Sicilia di Montalbano</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+	<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+	<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet">
+
+	<style>
+		body {
+			padding: 0;
+			margin: 0;
+		}
+
+		html,
+		body,
+		#map {
+			height: 100%;
+			width: 100vw;
+			font-family: 'Roboto Slab', serif;
+			font-size: 14px;
+		}
+
+		.title {
+			padding: 6px 8px;
+			font-size: 15px;
+			line-height: 19px;
+			font-weight: 600;
+			background: white;
+			background: rgba(255, 255, 255, 0.8);
+			box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+			border-radius: 5px;
+		}
+
+		.leaflet-popup-content h1 {
+			padding: 0;
+			margin: 0;
+			font-size: 15px;
+			line-height: 19px;
+			font-weight: 600;
+		}
+
+		.leaflet-popup-content .locations {
+			margin-bottom: 5px;
+			color: #777;
+		}
+
+		.leaflet-popup-content p {
+			margin: 0;
+			padding: 0;
+		}
+
+		.popupImage {
+			display: block;
+			height: auto;
+			max-width: 100%;
+			width: 100%;
+		}
+
+	</style>
+
+</head>
+
+<body>
+
+
+	<div id="map"></div>
+
+	<script>
+		// initialize the map
+		var map = L.map('map').setView([36.866728, 14.660358], 11);
+
+		// add a fullscreen button
+		map.addControl(new L.Control.Fullscreen());
+
+		// load a tile layer
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'})
+		.addTo(map);
+
+		// embed point data in GeoJSON format
+		var locations = {
+			"type": "FeatureCollection",
+			"name": "locations",
+			"crs": {
+				"type": "name",
+				"properties": {
+					"name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+				}
+			},
+			"features": [{
+					"type": "Feature",
+					"properties": {
+						"name": "",
+						"address": "Ponte Vecchio, Ragusa",
+						"image_url": ""
+					},
+					"geometry": {
+						"type": "Point",
+						"coordinates": [14.729036, 36.923474]
+					}
+				},
+				{
+					"type": "Feature",
+					"properties": {
+						"name": "",
+						"address": "Chiesa S.Maria delle Scale, Ragusa",
+						"image_url": "https://upload.wikimedia.org/wikipedia/it/thumb/6/63/Il_ladro_di_merendine_%281999%29_-_Luca_Zingaretti_e_Peppino_Mazzotta.jpg/320px-Il_ladro_di_merendine_%281999%29_-_Luca_Zingaretti_e_Peppino_Mazzotta.jpg"
+					},
+					"geometry": {
+						"type": "Point",
+						"coordinates": [14.735162, 36.925358]
+					}
+				},
+				{
+					"type": "Feature",
+					"properties": {
+						"name": "",
+						"address": "Circolo di Conversazione, Piazza Duomo, Ragusa Ibla",
+						"image_url": ""
+					},
+					"geometry": {
+						"type": "Point",
+						"coordinates": [14.744216, 36.926364]
+					}
+				},
+				{
+					"type": "Feature",
+					"properties": {
+						"name": "Osteria of Don Caloger",
+						"address": "A' Rusticana, Ragusa Ibla",
+						"image_url": ""
+					},
+					"geometry": {
+						"type": "Point",
+						"coordinates": [14.746571, 36.925413]
+					}
+				},
+				{
+					"type": "Feature",
+					"properties": {
+						"name": "",
+						"address": "Tomba Bizantina, Grotta Delle Trabacche, Ragusa",
+						"image_url": ""
+					},
+					"geometry": {
+						"type": "Point",
+						"coordinates": [14.647568, 36.910960]
+					}
+				},
+				{
+					"type": "Feature",
+					"properties": {
+						"name": "Casa di Don Balduccio Sinagra",
+						"address": "Il Castello di Donnafugata, Donnafugata",
+						"image_url": ""
+					},
+					"geometry": {
+						"type": "Point",
+						"coordinates": [14.564211, 36.882017]
+					}
+				},
+				{
+					"type": "Feature",
+					"properties": {
+						"name": "",
+						"address": "Chiesa S.Maria dele Stelle e Pinacoteca, Comiso",
+						"image_url": ""
+					},
+					"geometry": {
+						"type": "Point",
+						"coordinates": [14.604301, 36.946440]
+					}
+				},
+				{
+					"type": "Feature",
+					"properties": {
+						"name": "",
+						"address": "Piazza San Giovanni, Vittoria",
+						"image_url": ""
+					},
+					"geometry": {
+						"type": "Point",
+						"coordinates": [14.538979, 36.948966]
+					}
+				},
+				{
+					"type": "Feature",
+					"properties": {
+						"name": "La Casa di Montalbano, Marinella",
+						"address": "Piazzetta della Torre, Punta Secca",
+						"image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/97017_Punta_Secca%2C_Province_of_Ragusa%2C_Italy_-_panoramio.jpg/320px-97017_Punta_Secca%2C_Province_of_Ragusa%2C_Italy_-_panoramio.jpg"
+					},
+					"geometry": {
+						"type": "Point",
+						"coordinates": [14.493049, 36.788249]
+					}
+				},
+				{
+					"type": "Feature",
+					"properties": {
+						"name": "",
+						"address": "Lungomare Mediterraneo, Marina di Ragusa",
+						"image_url": ""
+					},
+					"geometry": {
+						"type": "Point",
+						"coordinates": [14.551301, 36.782608]
+					}
+				},
+				{
+					"type": "Feature",
+					"properties": {
+						"name": "Il commissariato di Vigata",
+						"address": "Municipio di Scicli, via Francesco Mormino Penna, Scicli",
+						"image_url": ""
+					},
+					"geometry": {
+						"type": "Point",
+						"coordinates": [14.706833, 36.793683]
+					}
+				},
+				{
+					"type": "Feature",
+					"properties": {
+						"name": "",
+						"address": "Chiesa San Bartolomeo, Scicli",
+						"image_url": ""
+					},
+					"geometry": {
+						"type": "Point",
+						"coordinates": [14.708270, 36.791012]
+					}
+				},
+				{
+					"type": "Feature",
+					"properties": {
+						"name": "La Mannara",
+						"address": "Fornace Penna, Sampieri",
+						"image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/FornacePenna.JPG/320px-FornacePenna.JPG"
+					},
+					"geometry": {
+						"type": "Point",
+						"coordinates": [14.757590, 36.712571]
+					}
+				},
+				{
+					"type": "Feature",
+					"properties": {
+						"name": "",
+						"address": "Basilica Santa Maria Maggiore, Ispica",
+						"image_url": ""
+					},
+					"geometry": {
+						"type": "Point",
+						"coordinates": [14.910888, 36.784597]
+					}
+				},
+				{
+					"type": "Feature",
+					"properties": {
+						"name": "",
+						"address": "Particolare del Duomo di San Giorgio, Modica",
+						"image_url": ""
+					},
+					"geometry": {
+						"type": "Point",
+						"coordinates": [14.761221, 36.863793]
+					}
+				}
+			]
+		}
+
+		// style circle markers
+		var geojsonMarkerOptions = {
+			radius: 8,
+			fillColor: "#fff44f",
+			color: "#000",
+			weight: 1,
+			opacity: 1,
+			fillOpacity: 0.8
+		};
+
+		// apply styling and add popups
+		var layerGroup = L.geoJSON(locations, {
+			pointToLayer: function(feature, latlng) {
+				return L.circleMarker(latlng, geojsonMarkerOptions);
+			},
+			onEachFeature: function(feature, layer) {
+				layer.bindPopup('<img src="' + feature.properties.image_url + '"class="popupImage">' +
+				feature.properties.name + '</h1><p class="locations">' + feature.properties.address);
+			}
+		}).addTo(map);
+
+		// add a title
+		var title = L.control({
+			position: "topright"
+		});
+		title.onAdd = function(map) {
+			this._div = L.DomUtil.create("div", "title");
+			this._div.innerHTML = "la Sicilia di Montalbano";
+			return this._div;
+		};
+
+		title.addTo(map);
+
+	</script>
+</body>
+
+</html>
